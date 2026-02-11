@@ -1,11 +1,3 @@
-"""Data loading & preprocessing utilities.
-
-Provides functions to load the raw CSV, perform minimal preprocessing,
-split into train/test and save Parquet files to `data/processed/`.
-
-Usage (CLI):
-    python src/utils/data.py --raw data/raw/credit.csv --out data/processed
-"""
 from pathlib import Path
 from typing import Optional
 
@@ -29,21 +21,16 @@ def _detect_target(df: pd.DataFrame) -> Optional[str]:
 
 
 def preprocess(df: pd.DataFrame) -> pd.DataFrame:
-    # Minimal, safe preprocessing useful for tabular credit datasets
     df = df.copy()
-    # drop an id column if present
     for id_col in ("id", "ID", "Id"):
         if id_col in df.columns:
             df = df.drop(columns=[id_col])
 
-    # strip whitespace from column names
     df.columns = [c.strip() for c in df.columns]
 
-    # normalize boolean/label columns if a target exists
     target = _detect_target(df)
     if target is not None:
         if df[target].dtype == object:
-            # common mappings
             df[target] = df[target].str.strip().str.lower().map({"yes": 1, "no": 0, "good": 0, "bad": 1})
         df[target] = pd.to_numeric(df[target], errors="coerce")
     return df
@@ -65,7 +52,6 @@ def split_and_save(df: pd.DataFrame, out_dir: str, test_size: float = 0.2, rando
         test = X_test.copy()
         test[target] = y_test
     else:
-        # no target detected; split full dataframe
         train, test = train_test_split(df, test_size=test_size, random_state=random_state)
 
     train_path = out_dir / "train.parquet"

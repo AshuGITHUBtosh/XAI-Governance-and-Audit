@@ -1,14 +1,6 @@
-"""Fetch the canonical German Credit dataset from OpenML and save locally.
-
-This script fetches `credit-g` via sklearn.datasets.fetch_openml and writes
-`data/raw/german_credit.csv` then calls the processing pipeline to create
-`data/processed/train.parquet` and `test.parquet`.
-"""
 from pathlib import Path
 import sys
 
-# Ensure project root is on sys.path so `from src...` imports work when executing
-# this file directly (e.g. `python src/datasets/fetch_german.py`).
 ROOT = Path(__file__).resolve().parents[1].parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
@@ -23,17 +15,14 @@ def main():
     ds = fetch_openml(name="credit-g", version=1, as_frame=True)
     df = ds.frame
 
-    # Rename target for clarity
     df = df.rename(columns={"class": "default"})
 
-    # Save raw dataset (MRM requirement)
     out_raw = Path("data/raw")
     out_raw.mkdir(parents=True, exist_ok=True)
     raw_path = out_raw / "credit.csv"
     df.to_csv(raw_path, index=False)
     print(f"Raw dataset written to {raw_path}")
 
-    # Preprocess and split/save processed datasets
     df_p = preprocess(df)
     out_proc = Path("data/processed")
     train_path, test_path = split_and_save(df_p, str(out_proc), test_size=0.2, random_state=42)

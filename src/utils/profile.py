@@ -1,8 +1,3 @@
-"""Dataset profiling utility.
-
-Generates a small JSON profile with dataset shape, target detection, class balance,
-missingness, dtypes, numeric summaries, top correlations, and suggested sensitive cols.
-"""
 from pathlib import Path
 import json
 from typing import List
@@ -42,7 +37,6 @@ def profile(df: pd.DataFrame) -> dict:
     if not num.empty:
         desc = num.describe().T
         prof["numeric_summary"] = desc[ ["count","mean","std","min","25%","50%","75%","max"] ].to_dict(orient="index")
-        # top correlations
         corr = num.corr().abs()
         corr_vals = []
         for i, col in enumerate(corr.columns):

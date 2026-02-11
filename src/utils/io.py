@@ -1,5 +1,3 @@
-"""JSON/PDF saving utilities (placeholder)."""
-
 def save_json(obj, path):
     with open(path, 'w') as f:
         import json

@@ -1,8 +1,3 @@
-"""Fairness metrics: demographic parity, equalized odds.
-
-This module provides basic implementations and a CLI that reads a predictions
-CSV with columns `y_true`, `y_pred`, and a sensitive column to compute metrics.
-"""
 from typing import Union
 import pandas as pd
 import json
@@ -10,7 +5,6 @@ from pathlib import Path
 
 
 def demographic_parity_difference(df: pd.DataFrame, y_pred_col: str, sensitive_col: str) -> float:
-    # P(ŷ=1|s=protected) - P(ŷ=1|s=reference)
     grp = df.groupby(sensitive_col)[y_pred_col].mean()
     if len(grp) < 2:
         return 0.0
@@ -18,7 +12,6 @@ def demographic_parity_difference(df: pd.DataFrame, y_pred_col: str, sensitive_c
 
 
 def equalized_odds_difference(df: pd.DataFrame, y_true_col: str, y_pred_col: str, sensitive_col: str) -> float:
-    # computes max difference in TPR and FPR across sensitive groups
     groups = df[sensitive_col].unique()
     tprs = {}
     fprs = {}

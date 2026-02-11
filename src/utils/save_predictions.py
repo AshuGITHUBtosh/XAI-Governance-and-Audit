@@ -1,4 +1,3 @@
-"""Save model predictions alongside original test dataframe for downstream analysis."""
 from pathlib import Path
 import joblib
 import pandas as pd
@@ -9,14 +8,12 @@ def main(model_pkl: str = 'artifacts/model_xgb.pkl', test_parquet: str = 'data/p
 
     df_test = pd.read_parquet(test_parquet)
 
-    # try to detect target
     target = None
     for c in ['default', 'target', 'y', 'label', 'class', 'status']:
         if c in df_test.columns:
             target = c
             break
 
-    # prepare X using same preprocessing as training
     X = df_test.copy()
     if target is not None:
         y = X[target]
@@ -24,12 +21,10 @@ def main(model_pkl: str = 'artifacts/model_xgb.pkl', test_parquet: str = 'data/p
     else:
         y = None
 
-    # drop index/id if present
     for id_col in ('Unnamed: 0', 'id', 'ID', 'Id'):
         if id_col in X.columns:
             X = X.drop(columns=[id_col])
 
-    # simple imputations
     for col in X.select_dtypes(include=['number']).columns:
         X[col] = X[col].fillna(X[col].median())
     for col in X.select_dtypes(include=['object', 'category']).columns:
@@ -37,11 +32,9 @@ def main(model_pkl: str = 'artifacts/model_xgb.pkl', test_parquet: str = 'data/p
 
     X_enc = pd.get_dummies(X, drop_first=True)
 
-    # align features with model if possible
     try:
         preds = model.predict(X_enc)
     except Exception:
-        # attempt to add missing columns with zeros
         import numpy as np
         model_features = model.get_booster().feature_names
         for f in model_features:

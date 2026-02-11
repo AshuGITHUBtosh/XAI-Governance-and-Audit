@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-29T09:01:03.538955Z",
+  "generated_at": "2026-02-10T10:53:13.147782Z",
   "artifacts": {
     "dataset_profile": {
       "rows": 800,
@@ -219,6 +219,565 @@
       },
       "demographic_parity_difference": 0.21371851040525738,
       "equalized_odds_difference": 0.19117647058823528
+    },
+    "trajectory": {
+      "meta": {
+        "preds_rows": 200,
+        "train_rows": 800
+      },
+      "psi": {
+        "duration": 0.03766389728021024,
+        "credit_amount": 0.08857703877892195,
+        "installment_commitment": 0.02413394857644273,
+        "residence_since": 0.014625433251034846,
+        "age": 0.07970878682416244,
+        "existing_credits": 0.018786882683508747,
+        "num_dependents": 0.004980666297247936,
+        "default": 0.0
+      },
+      "bucket_performance": [],
+      "cohort_over_time": [
+        {
+          "period_start": "2000-01-01",
+          "group": "0<=X<200",
+          "count": 5,
+          "accuracy": 0.8
+        },
+        {
+          "period_start": "2000-01-01",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-01-08",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-01-08",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 0.5
+        },
+        {
+          "period_start": "2000-01-08",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-01-15",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-01-15",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-01-15",
+          "group": "no checking",
+          "count": 5,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-01-22",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-01-22",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-01-22",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-01-22",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-01-29",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-01-29",
+          "group": "no checking",
+          "count": 5,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-05",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-02-05",
+          "group": "<0",
+          "count": 6,
+          "accuracy": 0.3333333333333333
+        },
+        {
+          "period_start": "2000-02-12",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 0.5
+        },
+        {
+          "period_start": "2000-02-12",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-12",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-12",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-19",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 0.5
+        },
+        {
+          "period_start": "2000-02-19",
+          "group": "<0",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-02-19",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-26",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-26",
+          "group": "<0",
+          "count": 3,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-02-26",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-02-26",
+          "group": "no checking",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-03-04",
+          "group": "0<=X<200",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-03-04",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-03-04",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-03-11",
+          "group": "0<=X<200",
+          "count": 4,
+          "accuracy": 0.75
+        },
+        {
+          "period_start": "2000-03-11",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-03-11",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-03-11",
+          "group": "no checking",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-03-18",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-03-18",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-03-18",
+          "group": "no checking",
+          "count": 4,
+          "accuracy": 0.75
+        },
+        {
+          "period_start": "2000-03-25",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-03-25",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-03-25",
+          "group": "no checking",
+          "count": 4,
+          "accuracy": 0.5
+        },
+        {
+          "period_start": "2000-04-01",
+          "group": "0<=X<200",
+          "count": 3,
+          "accuracy": 0.3333333333333333
+        },
+        {
+          "period_start": "2000-04-01",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-01",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-08",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-08",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-08",
+          "group": "no checking",
+          "count": 5,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-15",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-15",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-15",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-15",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-04-22",
+          "group": "0<=X<200",
+          "count": 2,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-04-22",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-04-22",
+          "group": "no checking",
+          "count": 4,
+          "accuracy": 0.75
+        },
+        {
+          "period_start": "2000-04-29",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-04-29",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-04-29",
+          "group": ">=200",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-04-29",
+          "group": "no checking",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-05-06",
+          "group": "0<=X<200",
+          "count": 4,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-05-06",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-05-06",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 0.5
+        },
+        {
+          "period_start": "2000-05-13",
+          "group": "<0",
+          "count": 5,
+          "accuracy": 0.6
+        },
+        {
+          "period_start": "2000-05-13",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-05-20",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-05-20",
+          "group": "<0",
+          "count": 3,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-05-20",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-05-27",
+          "group": "0<=X<200",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-05-27",
+          "group": "no checking",
+          "count": 4,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-03",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-03",
+          "group": "<0",
+          "count": 4,
+          "accuracy": 0.25
+        },
+        {
+          "period_start": "2000-06-03",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-10",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-10",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 0.5
+        },
+        {
+          "period_start": "2000-06-10",
+          "group": "no checking",
+          "count": 4,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-17",
+          "group": "0<=X<200",
+          "count": 3,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "period_start": "2000-06-17",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-06-17",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-24",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-06-24",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-06-24",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-06-24",
+          "group": "no checking",
+          "count": 3,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-01",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-01",
+          "group": "<0",
+          "count": 4,
+          "accuracy": 0.75
+        },
+        {
+          "period_start": "2000-07-01",
+          "group": ">=200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-01",
+          "group": "no checking",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-08",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-08",
+          "group": "<0",
+          "count": 2,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-08",
+          "group": "no checking",
+          "count": 4,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-15",
+          "group": "0<=X<200",
+          "count": 1,
+          "accuracy": 1.0
+        },
+        {
+          "period_start": "2000-07-15",
+          "group": "<0",
+          "count": 1,
+          "accuracy": 0.0
+        },
+        {
+          "period_start": "2000-07-15",
+          "group": "no checking",
+          "count": 2,
+          "accuracy": 1.0
+        }
+      ]
     }
   }
 }

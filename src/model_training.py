@@ -1,12 +1,3 @@
-"""Train & evaluate an XGBoost baseline model.
-
-CLI usage:
-  python src/model_training.py --train data/processed/train.parquet \
-      --test data/processed/test.parquet --target default --model artifacts/model_xgb.json
-
-The script expects a labeled train/test parquet. If `--target` is omitted the script
-will try to auto-detect common target column names; if none found it will exit with an error.
-"""
 from pathlib import Path
 import json
 import sys
@@ -28,7 +19,6 @@ def detect_target(df: pd.DataFrame) -> Optional[str]:
 
 def preprocess_for_model(df: pd.DataFrame, target: str) -> (pd.DataFrame, pd.Series):
     df = df.copy()
-    # drop obvious index column
     for id_col in ("Unnamed: 0", "id", "ID", "Id"):
         if id_col in df.columns:
             df = df.drop(columns=[id_col])
@@ -36,19 +26,15 @@ def preprocess_for_model(df: pd.DataFrame, target: str) -> (pd.DataFrame, pd.Ser
     y = df[target].astype(float)
     X = df.drop(columns=[target])
 
-    # simple imputations
     for col in X.select_dtypes(include=["number"]).columns:
         X[col] = X[col].fillna(X[col].median())
     for col in X.select_dtypes(include=["object", "category"]).columns:
-        # handle categorical dtype safely
         if pd.api.types.is_categorical_dtype(X[col]):
             X[col] = X[col].cat.add_categories(["__missing__"]).fillna("__missing__")
         else:
             X[col] = X[col].fillna("__missing__")
 
-    # one-hot categorical
     X = pd.get_dummies(X, drop_first=True)
-    # sanitize feature names: XGBoost doesn't accept characters like [, ], <
     import re
     X.columns = [re.sub(r"[^0-9a-zA-Z_]", "_", str(c)) for c in X.columns]
     return X, y
@@ -78,7 +64,6 @@ def train_and_evaluate(train_path: str, test_path: str, target: str, model_out: 
         "accuracy": float(accuracy_score(y_test, y_pred)),
         "classification_report": classification_report(y_test, y_pred, output_dict=True)
     }
-    # try ROC AUC if binary
     if len(set(y_test.dropna())) == 2:
         try:
             y_prob = model.predict_proba(X_test)[:, 1]
@@ -86,23 +71,17 @@ def train_and_evaluate(train_path: str, test_path: str, target: str, model_out: 
         except Exception:
             pass
 
-    # save model (xgboost JSON) and pickled sklearn wrapper
     model_path = Path(model_out)
     model_path.parent.mkdir(parents=True, exist_ok=True)
-    # save booster JSON for portability
     model.get_booster().save_model(str(model_path))
 
-    # also save sklearn-wrapped model for inference & explainability
     pkl_path = model_path.with_suffix('.pkl')
     joblib.dump(model, str(pkl_path))
 
-    # save metrics
     save_json(metrics, Path(metrics_out))
 
-    # save predictions for fairness and downstream use
     preds_path = Path('reports/model_predictions.csv')
     try:
-        # ensure test had the sensitive cols if requested
         preds_df = X_test.copy()
         preds_df['y_true'] = list(y_test)
         preds_df['y_pred'] = list(y_pred)

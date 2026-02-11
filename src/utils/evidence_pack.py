@@ -1,9 +1,3 @@
-"""Evidence pack generator: aggregate audit JSONs and create a simple PDF report.
-
-Outputs:
-- reports/audit_report.json
-- reports/audit_report.pdf
-"""
 from pathlib import Path
 import json
 from datetime import datetime
@@ -29,7 +23,8 @@ def build_audit_bundle(out_json: Path) -> dict:
         'dataset_profile': Path('reports/dataset_profile.json'),
         'model_metrics': Path('reports/model_metrics.json'),
         'explainability': Path('reports/explainability_summary.json'),
-        'fairness': Path('reports/fairness_summary.json')
+        'fairness': Path('reports/fairness_summary.json'),
+        'trajectory': Path('reports/trajectory_summary.json')
     }
 
     for key, p in files.items():
@@ -59,7 +54,6 @@ def save_audit_pdf(bundle: dict, out_pdf: Path):
     c.drawString(margin, y, f"Generated at: {bundle.get('generated_at')}")
     y -= 25
 
-    # Dataset profile summary
     dp = bundle['artifacts'].get('dataset_profile') or {}
     c.setFont('Helvetica-Bold', 12)
     c.drawString(margin, y, 'Dataset Profile:')
@@ -82,7 +76,6 @@ def save_audit_pdf(bundle: dict, out_pdf: Path):
         y -= 14
 
     y -= 6
-    # Model metrics
     mm = bundle['artifacts'].get('model_metrics') or {}
     c.setFont('Helvetica-Bold', 12)
     c.drawString(margin, y, 'Model Metrics:')
@@ -99,7 +92,6 @@ def save_audit_pdf(bundle: dict, out_pdf: Path):
         y -= 12
 
     y -= 6
-    # Explainability
     ex = bundle['artifacts'].get('explainability') or {}
     c.setFont('Helvetica-Bold', 12)
     c.drawString(margin, y, 'Explainability (Top features):')
@@ -118,7 +110,6 @@ def save_audit_pdf(bundle: dict, out_pdf: Path):
         y -= 12
 
     y -= 6
-    # Fairness
     fa = bundle['artifacts'].get('fairness') or {}
     c.setFont('Helvetica-Bold', 12)
     c.drawString(margin, y, 'Fairness Summary:')
@@ -133,6 +124,43 @@ def save_audit_pdf(bundle: dict, out_pdf: Path):
                 y = height - margin
     else:
         c.drawString(margin, y, 'No fairness summary found')
+        y -= 12
+
+    # Trajectory summary (PSI, bucket perf)
+    tr = bundle['artifacts'].get('trajectory') or {}
+    c.setFont('Helvetica-Bold', 12)
+    c.drawString(margin, y, 'Trajectory Summary:')
+    y -= 18
+    c.setFont('Helvetica', 10)
+    if tr:
+        psi = tr.get('psi', {}) or {}
+        if psi:
+            c.drawString(margin, y, 'Top PSI features:')
+            y -= 14
+            items = sorted(psi.items(), key=lambda x: abs(x[1]) if x[1] is not None else 0, reverse=True)[:8]
+            for k, v in items:
+                try:
+                    val = float(v) if v is not None else None
+                except Exception:
+                    val = v
+                c.drawString(margin + 6, y, f"{k}: {val}")
+                y -= 12
+                if y < margin + 50:
+                    c.showPage()
+                    y = height - margin
+        bp = tr.get('bucket_performance') or []
+        if bp:
+            c.drawString(margin, y, 'Bucket performance (count / accuracy):')
+            y -= 14
+            for rec in bp:
+                line = f"{rec.get('age_bucket', rec.get('index', 'bucket'))}: {rec.get('count')} / {rec.get('accuracy')}"
+                c.drawString(margin + 6, y, line)
+                y -= 12
+                if y < margin + 50:
+                    c.showPage()
+                    y = height - margin
+    else:
+        c.drawString(margin, y, 'No trajectory summary found')
         y -= 12
 
     c.showPage()
