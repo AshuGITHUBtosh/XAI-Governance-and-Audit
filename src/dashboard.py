@@ -106,6 +106,10 @@ else:
             model = result['best_model']
             model_metrics = result['model_metrics']
             fairness = result['fairness']
+            fair_threshold = result.get('fair_threshold', 0.5)
+            threshold_analysis = result.get('threshold_analysis', [])
+            drift_results = result.get('drift', {})
+            drift_summary = result.get('drift_summary', {})
             X_test = result['X_test']
             y_test = result['y_test']
             y_pred = result['y_pred']
@@ -140,11 +144,115 @@ else:
             # Show threshold tuning info
             if 'optimal_threshold' in best_metrics:
                 st.subheader("Threshold Tuning")
-                col1, col2 = st.columns(2)
+                col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("Optimal Threshold", f"{best_metrics['optimal_threshold']:.3f}")
+                    st.metric("Optimal Threshold (F1)", f"{best_metrics['optimal_threshold']:.3f}")
                 with col2:
+                    st.metric("Fairness-Aware Threshold", f"{fair_threshold:.3f}")
+                with col3:
                     st.metric("Tuned Accuracy", f"{best_metrics['tuned_accuracy']:.3f}")
+            
+            # Threshold Tradeoff Analysis
+            if threshold_analysis:
+                st.subheader("Threshold Tradeoff Analysis")
+                
+                # Convert to DataFrame for easier plotting
+                ta_df = pd.DataFrame(threshold_analysis)
+                
+                # Create three columns for the charts
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    # Accuracy vs Threshold
+                    fig_acc = go.Figure()
+                    fig_acc.add_trace(go.Scatter(
+                        x=ta_df['threshold'],
+                        y=ta_df['accuracy'],
+                        mode='lines+markers',
+                        name='Accuracy',
+                        line=dict(color='blue')
+                    ))
+                    fig_acc.add_vline(x=fair_threshold, line_dash="dash", line_color="red", annotation_text="Fair Threshold")
+                    fig_acc.update_layout(
+                        title='Accuracy vs Threshold',
+                        xaxis_title='Threshold',
+                        yaxis_title='Accuracy',
+                        height=400
+                    )
+                    st.plotly_chart(fig_acc, use_container_width=True)
+                
+                with col2:
+                    # Demographic Parity vs Threshold
+                    fig_dp = go.Figure()
+                    fig_dp.add_trace(go.Scatter(
+                        x=ta_df['threshold'],
+                        y=ta_df['demographic_parity'],
+                        mode='lines+markers',
+                        name='Demographic Parity',
+                        line=dict(color='orange')
+                    ))
+                    fig_dp.add_hline(y=0.2, line_dash="dash", line_color="red", annotation_text="Fairness Limit")
+                    fig_dp.add_vline(x=fair_threshold, line_dash="dash", line_color="green", annotation_text="Fair Threshold")
+                    fig_dp.update_layout(
+                        title='Demographic Parity Bias vs Threshold',
+                        xaxis_title='Threshold',
+                        yaxis_title='Demographic Parity Difference',
+                        height=400
+                    )
+                    st.plotly_chart(fig_dp, use_container_width=True)
+                
+                with col3:
+                    # Equalized Odds vs Threshold
+                    fig_eo = go.Figure()
+                    fig_eo.add_trace(go.Scatter(
+                        x=ta_df['threshold'],
+                        y=ta_df['equalized_odds'],
+                        mode='lines+markers',
+                        name='Equalized Odds',
+                        line=dict(color='purple')
+                    ))
+                    fig_eo.add_hline(y=0.2, line_dash="dash", line_color="red", annotation_text="Fairness Limit")
+                    fig_eo.add_vline(x=fair_threshold, line_dash="dash", line_color="green", annotation_text="Fair Threshold")
+                    fig_eo.update_layout(
+                        title='Equalized Odds Bias vs Threshold',
+                        xaxis_title='Threshold',
+                        yaxis_title='Equalized Odds Difference',
+                        height=400
+                    )
+                    st.plotly_chart(fig_eo, use_container_width=True)
+                
+                # Show threshold analysis table
+                st.subheader("Threshold Analysis Details")
+                st.dataframe(ta_df.round(4))
+            
+            # Data Drift Detection
+            st.header("Data Drift Detection")
+            if drift_summary:
+                col1, col2, col3, col4 = st.columns(4)
+                with col1:
+                    st.metric("Total Features Monitored", drift_summary.get('total_features_monitored', 0))
+                with col2:
+                    st.metric("Features with Drift", drift_summary.get('features_with_drift', 0))
+                with col3:
+                    st.metric("Drift Percentage", f"{drift_summary.get('drift_percentage', 0):.1f}%")
+                with col4:
+                    st.metric("Status", "⚠️ Drift Detected" if drift_summary.get('features_with_drift', 0) > 0 else "✅ No Drift")
+                
+                # Show drifted features
+                if drift_summary.get('drifted_features'):
+                    st.subheader("Drifted Features Details")
+                    drift_detail_data = []
+                    for feature in drift_summary.get('drifted_features', []):
+                        if feature in drift_results:
+                            drift_detail_data.append({
+                                'Feature': feature,
+                                'P-Value': f"{drift_results[feature]['p_value']:.6f}",
+                                'KS Statistic': f"{drift_results[feature].get('ks_statistic', 0):.4f}",
+                                'Drift Detected': '✓'
+                            })
+                    if drift_detail_data:
+                        drift_df = pd.DataFrame(drift_detail_data)
+                        st.dataframe(drift_df, use_container_width=True)
             
             st.header("Fairness Metrics")
             col1, col2 = st.columns(2)
@@ -205,8 +313,11 @@ else:
                 'accuracy': best_metrics.get('accuracy', None),
                 'tuned_accuracy': best_metrics.get('tuned_accuracy', None),
                 'optimal_threshold': best_metrics.get('optimal_threshold', None),
+                'fair_threshold': fair_threshold,
                 'fairness_dp': fairness['demographic_parity_difference'],
                 'fairness_eo': fairness['equalized_odds_difference'],
+                'drift_features': drift_summary.get('features_with_drift', 0),
+                'drift_percentage': drift_summary.get('drift_percentage', 0.0),
                 'top_shap': list(shap_features.keys())[:5],
                 'best_model': best_name
             }
