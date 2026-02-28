@@ -19,6 +19,7 @@ from imblearn.over_sampling import SMOTE, ADASYN
 from imblearn.pipeline import Pipeline as ImbPipeline
 import joblib
 from src.utils.io import save_csv
+from src.drift import detect_feature_drift, summarize_drift
 import xgboost as xgb
 import warnings
 warnings.filterwarnings('ignore')
@@ -290,6 +291,10 @@ def train_and_evaluate_df(df: pd.DataFrame, target: str, sensitive: str, test_si
     
     # Split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=seed, stratify=y if len(y.unique()) > 1 else None)
+    
+    # Detect feature drift between training and test data
+    drift_results = detect_feature_drift(X_train, X_test, p_threshold=0.05)
+    drift_summary = summarize_drift(drift_results)
 
     # Train both models
     rf_model, xgb_model = train_models(X_train, y_train, seed)
@@ -381,6 +386,8 @@ def train_and_evaluate_df(df: pd.DataFrame, target: str, sensitive: str, test_si
         'fairness': fairness,
         'fair_threshold': float(fair_threshold),
         'threshold_analysis': threshold_analysis,
+        'drift': drift_results,
+        'drift_summary': drift_summary,
         'X_test': X_test,
         'y_test': y_test,
         'y_pred': y_pred,
