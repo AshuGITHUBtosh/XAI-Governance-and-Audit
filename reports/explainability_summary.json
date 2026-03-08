@@ -1,14 +1,14 @@
 {
   "mean_abs_shap": {
-    "checking_status_no_checking": 0.6737560033798218,
-    "credit_per_duration": 0.4189951419830322,
-    "credit_per_age": 0.3528904616832733,
-    "years_to_repay_ratio": 0.35141605138778687,
-    "credit_history_critical_other_existing_credit": 0.30032575130462646,
-    "purpose_new_car": 0.25607144832611084,
-    "savings_status__100": 0.2548190653324127,
-    "credit_amount": 0.2445547878742218,
-    "other_payment_plans_none": 0.24411530792713165,
-    "checking_status__0": 0.2427055388689041
+    "checking_status_no_checking": 0.7211797833442688,
+    "credit_per_duration": 0.5060949921607971,
+    "years_to_repay_ratio": 0.43894603848457336,
+    "credit_per_age": 0.4223249554634094,
+    "savings_status__100": 0.37223953008651733,
+    "credit_amount": 0.36941784620285034,
+    "purpose_new_car": 0.3343817889690399,
+    "checking_status__0": 0.3020516335964203,
+    "employment__1": 0.28903234004974365,
+    "duration": 0.2540332078933716
   }
 }

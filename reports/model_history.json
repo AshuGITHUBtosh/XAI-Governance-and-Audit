@@ -1,127 +1,46 @@
 [
   {
-    "timestamp": "2026-02-25T06:06:31.088180Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.22499999999999998,
-    "fairness_eo": 0.33333333333333337,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T06:37:14.667610Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.4144869215291751,
-    "fairness_eo": 0.56,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T06:40:40.170364Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.4144869215291751,
-    "fairness_eo": 0.56,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T06:42:43.063301Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.4144869215291751,
-    "fairness_eo": 0.56,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T06:45:07.646202Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.2764227642276422,
-    "fairness_eo": 0.5,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T06:52:30.449273Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.22499999999999998,
-    "fairness_eo": 0.33333333333333337,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T06:53:37.653912Z",
-    "roc_auc": 0.7808333333333333,
-    "fairness_dp": 0.4144869215291751,
-    "fairness_eo": 0.56,
-    "top_shap": [
-      "credit_history_existing_paid",
-      "credit_history_delayed_previously",
-      "checking_status_no_checking",
-      "checking_status___200",
-      "job_skilled"
-    ]
-  },
-  {
-    "timestamp": "2026-02-25T09:50:20.519038Z",
-    "roc_auc": 0.7845238095238095,
-    "accuracy": 0.74,
-    "tuned_accuracy": 0.76,
-    "optimal_threshold": 0.465,
-    "fairness_dp": 0.2357723577235772,
-    "fairness_eo": 0.4418604651162791,
-    "top_shap": [
-      "purpose_retraining",
-      "purpose_repairs",
-      "purpose_furniture_equipment",
-      "purpose_new_car",
-      "credit_history_existing_paid"
-    ],
-    "best_model": "RandomForest"
-  },
-  {
-    "timestamp": "2026-02-27T16:00:30.224508Z",
-    "roc_auc": 0.7576190476190476,
-    "accuracy": 0.73,
-    "tuned_accuracy": 0.755,
-    "optimal_threshold": 0.3852057109557109,
-    "fairness_dp": 0.5024432308134521,
-    "fairness_eo": 0.76,
+    "timestamp": "2026-03-08T05:32:39.549907Z",
+    "best_model": "Ensemble",
+    "roc_auc": 0.7647619047619048,
+    "accuracy": 0.76,
+    "tuned_accuracy": 0.74,
+    "optimal_threshold": 0.34263408938652196,
+    "fair_threshold": 0.5,
+    "cv_auc_mean": 0.7872209821428571,
+    "cv_auc_std": 0.03651875611353225,
+    "fairness_dp": 0.11299435028248586,
+    "fairness_eo": 0.3333333333333333,
+    "drift_features": 0,
+    "drift_percentage": 0.0,
     "top_shap": [
       "checking_status_no_checking",
       "credit_per_duration",
-      "credit_per_age",
       "years_to_repay_ratio",
-      "credit_history_critical_other_existing_credit"
-    ],
-    "best_model": "RandomForest"
+      "credit_per_age",
+      "savings_status__100"
+    ]
+  },
+  {
+    "timestamp": "2026-03-08T05:35:03.962074Z",
+    "best_model": "Ensemble",
+    "roc_auc": 0.7647619047619048,
+    "accuracy": 0.76,
+    "tuned_accuracy": 0.74,
+    "optimal_threshold": 0.34263408938652196,
+    "fair_threshold": 0.7000000000000001,
+    "cv_auc_mean": 0.7872209821428571,
+    "cv_auc_std": 0.03651875611353225,
+    "fairness_dp": 0.10991058122205663,
+    "fairness_eo": 0.2857142857142857,
+    "drift_features": 0,
+    "drift_percentage": 0.0,
+    "top_shap": [
+      "checking_status_no_checking",
+      "credit_per_duration",
+      "years_to_repay_ratio",
+      "credit_per_age",
+      "savings_status__100"
+    ]
   }
 ]

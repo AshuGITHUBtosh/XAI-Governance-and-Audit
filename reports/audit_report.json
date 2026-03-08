@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-27T16:00:30.229277Z",
+  "generated_at": "2026-03-08T05:35:03.963897Z",
   "artifacts": {
     "dataset_profile": {
       "rows": 1000,
@@ -212,59 +212,80 @@
       ]
     },
     "model_metrics": {
-      "accuracy": 0.73,
-      "tuned_accuracy": 0.755,
+      "accuracy": 0.76,
       "classification_report": {
         "0.0": {
-          "precision": 0.5517241379310345,
-          "recall": 0.5333333333333333,
-          "f1-score": 0.5423728813559322,
-          "support": 60.0
-        },
-        "1.0": {
-          "precision": 0.8028169014084507,
-          "recall": 0.8142857142857143,
-          "f1-score": 0.8085106382978723,
+          "precision": 0.7987012987012987,
+          "recall": 0.8785714285714286,
+          "f1-score": 0.8367346938775511,
           "support": 140.0
         },
-        "accuracy": 0.73,
+        "1.0": {
+          "precision": 0.6304347826086957,
+          "recall": 0.48333333333333334,
+          "f1-score": 0.5471698113207547,
+          "support": 60.0
+        },
+        "accuracy": 0.76,
         "macro avg": {
-          "precision": 0.6772705196697426,
-          "recall": 0.6738095238095239,
-          "f1-score": 0.6754417598269022,
+          "precision": 0.7145680406549972,
+          "recall": 0.680952380952381,
+          "f1-score": 0.6919522525991528,
           "support": 200.0
         },
         "weighted avg": {
-          "precision": 0.7274890723652259,
-          "recall": 0.73,
-          "f1-score": 0.7286693112152903,
+          "precision": 0.7482213438735178,
+          "recall": 0.76,
+          "f1-score": 0.7498652291105122,
           "support": 200.0
         }
       },
-      "roc_auc": 0.7576190476190476,
-      "optimal_threshold": 0.3852057109557109
+      "roc_auc": 0.7647619047619048,
+      "optimal_threshold": 0.34263408938652196,
+      "tuned_accuracy": 0.74
     },
     "explainability": {
       "mean_abs_shap": {
-        "checking_status_no_checking": 0.6737560033798218,
-        "credit_per_duration": 0.4189951419830322,
-        "credit_per_age": 0.3528904616832733,
-        "years_to_repay_ratio": 0.35141605138778687,
-        "credit_history_critical_other_existing_credit": 0.30032575130462646,
-        "purpose_new_car": 0.25607144832611084,
-        "savings_status__100": 0.2548190653324127,
-        "credit_amount": 0.2445547878742218,
-        "other_payment_plans_none": 0.24411530792713165,
-        "checking_status__0": 0.2427055388689041
+        "checking_status_no_checking": 0.7211797833442688,
+        "credit_per_duration": 0.5060949921607971,
+        "years_to_repay_ratio": 0.43894603848457336,
+        "credit_per_age": 0.4223249554634094,
+        "savings_status__100": 0.37223953008651733,
+        "credit_amount": 0.36941784620285034,
+        "purpose_new_car": 0.3343817889690399,
+        "checking_status__0": 0.3020516335964203,
+        "employment__1": 0.28903234004974365,
+        "duration": 0.2540332078933716
       }
     },
     "fairness": {
-      "demographic_parity_difference": 0.5024432308134521,
-      "equalized_odds_difference": 0.76
+      "demographic_parity_difference": 0.10991058122205663,
+      "equalized_odds_difference": 0.2857142857142857
     },
     "trajectory": {
       "psi": {},
-      "bucket_performance": [],
+      "bucket_performance": [
+        {
+          "sensitive": "middle_aged",
+          "count": 15.0,
+          "accuracy": 0.8666666666666667
+        },
+        {
+          "sensitive": "senior",
+          "count": 5.0,
+          "accuracy": 0.6
+        },
+        {
+          "sensitive": "young",
+          "count": 8.0,
+          "accuracy": 0.875
+        },
+        {
+          "sensitive": "young_adult",
+          "count": 15.0,
+          "accuracy": 0.7333333333333333
+        }
+      ],
       "cohort_over_time": []
     }
   }

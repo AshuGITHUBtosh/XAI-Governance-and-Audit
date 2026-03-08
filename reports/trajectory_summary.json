@@ -1,5 +1,26 @@
 {
   "psi": {},
-  "bucket_performance": [],
+  "bucket_performance": [
+    {
+      "sensitive": "middle_aged",
+      "count": 15.0,
+      "accuracy": 0.8666666666666667
+    },
+    {
+      "sensitive": "senior",
+      "count": 5.0,
+      "accuracy": 0.6
+    },
+    {
+      "sensitive": "young",
+      "count": 8.0,
+      "accuracy": 0.875
+    },
+    {
+      "sensitive": "young_adult",
+      "count": 15.0,
+      "accuracy": 0.7333333333333333
+    }
+  ],
   "cohort_over_time": []
 }
