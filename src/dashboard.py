@@ -100,6 +100,13 @@ def simulate_bias_mitigation(df: pd.DataFrame, target: str, sensitive: str) -> D
 # Dashboard
 # ---------------------------------------------------------------------------
 
+st.set_page_config(
+    page_title="ML Governance Toolkit",
+    page_icon="🛡️",
+    layout="wide",               
+    initial_sidebar_state="auto"
+)
+
 st.title("ML Governance Toolkit Dashboard")
 
 uploaded_file = st.file_uploader("Upload CSV Dataset", type=["csv"])

@@ -42,5 +42,27 @@
       "credit_per_age",
       "savings_status__100"
     ]
+  },
+  {
+    "timestamp": "2026-03-09T07:34:00.525128Z",
+    "best_model": "Ensemble",
+    "roc_auc": 0.7647619047619048,
+    "accuracy": 0.76,
+    "tuned_accuracy": 0.74,
+    "optimal_threshold": 0.34263408938652196,
+    "fair_threshold": 0.5,
+    "cv_auc_mean": 0.7872209821428571,
+    "cv_auc_std": 0.03651875611353225,
+    "fairness_dp": 0.11299435028248586,
+    "fairness_eo": 0.3333333333333333,
+    "drift_features": 0,
+    "drift_percentage": 0.0,
+    "top_shap": [
+      "checking_status_no_checking",
+      "credit_per_duration",
+      "years_to_repay_ratio",
+      "credit_per_age",
+      "savings_status__100"
+    ]
   }
 ]

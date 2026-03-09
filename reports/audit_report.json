@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-08T05:35:03.963897Z",
+  "generated_at": "2026-03-09T07:34:00.529494Z",
   "artifacts": {
     "dataset_profile": {
       "rows": 1000,
@@ -259,31 +259,31 @@
       }
     },
     "fairness": {
-      "demographic_parity_difference": 0.10991058122205663,
-      "equalized_odds_difference": 0.2857142857142857
+      "demographic_parity_difference": 0.11299435028248586,
+      "equalized_odds_difference": 0.3333333333333333
     },
     "trajectory": {
       "psi": {},
       "bucket_performance": [
         {
-          "sensitive": "middle_aged",
-          "count": 15.0,
-          "accuracy": 0.8666666666666667
+          "sensitive": "female div/dep/mar",
+          "count": 61.0,
+          "accuracy": 0.7377049180327869
         },
         {
-          "sensitive": "senior",
-          "count": 5.0,
-          "accuracy": 0.6
+          "sensitive": "male div/sep",
+          "count": 9.0,
+          "accuracy": 0.7777777777777778
         },
         {
-          "sensitive": "young",
-          "count": 8.0,
-          "accuracy": 0.875
+          "sensitive": "male mar/wid",
+          "count": 12.0,
+          "accuracy": 0.6666666666666666
         },
         {
-          "sensitive": "young_adult",
-          "count": 15.0,
-          "accuracy": 0.7333333333333333
+          "sensitive": "male single",
+          "count": 118.0,
+          "accuracy": 0.7796610169491526
         }
       ],
       "cohort_over_time": []
